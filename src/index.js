@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './style.js';
+import './statics/iconfont/iconfont.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+//引入css该文件中包含的其他组件也会生效
 ReactDOM.render(
   <React.StrictMode>
     <App />
