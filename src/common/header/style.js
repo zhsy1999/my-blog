@@ -111,7 +111,7 @@ export const Button = style.div`
 export const SearchRapper = style.div`
   position: relative;
   float: left;
-  .iconfont {
+  .zoom {
     position: absolute;
     right: 5px;
     bottom: 5px;
@@ -126,3 +126,56 @@ export const SearchRapper = style.div`
     }
   }
 `;
+
+export const SearchInfo = style.div`
+  position: absolute;
+  left: 0;
+  top: 56px;
+  width: 240px;
+  padding: 0 20px;
+  box-shadow: 0 0 8px rgba(0,0,0,.2);
+`
+
+export const SearchInfoTitle = style.div`
+  margin-top: 20px;
+  margin-bottom: 15px;
+  line-height: 20px;
+  font-size: 14px;
+  color: #969696;
+`
+
+// 该组件下带有spin标签的组件应用样式   只有block样式才能进行transform
+// 给标签加 transition 让其具备过度特性 设置transform-origin让其围绕中心点旋转 每次点击改变transform中rotate的值 
+export const SearchInfoSwitch = style.span`
+  float: right;
+  font-size: 13px;
+  cursor: pointer;
+  .spin {
+    display: block;
+    float: left;
+    font-size: 12px;
+    margin-right: 2px;
+    transition: all .3s ease-in;
+    transform-origin: center center;
+  }
+`
+
+// 设置块状目的是自定义宽高 块状之后特性占据一行 设置float: left让item不占据一行自由排布 但元素浮动了
+export const SearchInfoItem = style.a`
+  display:block;
+  float: left;
+  line-height: 20px;
+  font-size: 12px;
+  padding: 0 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  color: #787878;
+  border-radius: 3px;
+`
+
+// 自己设置元素浮动 宽高超出外层包裹元素 设置overflow后形成BFC 
+export const SearchInfoList = style.div`
+  overflow: hidden;
+  margin-bottom: 10px;
+`
