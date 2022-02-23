@@ -1,12 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Topic from './component/Topic'
 import List from './component/List'
 import Recommend from './component/Recommend'
 import Writer from './component/Writer'
 import { HomeWrapper, HomeLeft, HomeRight } from './style'
+import axios from 'axios'
+import { connect } from 'react-redux'
 
-
-export default function Home() {
+const Home = (props) => {
+  const { changeHomeData } = props
+  useEffect(()=>{
+    axios.get('/api/home.json').then((res)=>{
+      // console.log(res.data.data)
+      const result = res.data.data
+      const action = {
+        type: 'change_home_data',
+        topiclist: result.topiclist,
+        articleList: result.articleList,
+        recommendList: result.recommendList,
+      }
+      changeHomeData(action)
+    })
+  })
   return (
     <HomeWrapper>
       <HomeLeft>
@@ -21,3 +36,11 @@ export default function Home() {
     </HomeWrapper>
   )
 }
+
+const mapDispatch = (dispatch) => ({
+  changeHomeData(action) {
+    dispatch(action);
+  }
+})
+
+export default connect(null, mapDispatch)(Home)

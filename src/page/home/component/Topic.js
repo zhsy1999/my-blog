@@ -7,7 +7,7 @@ const Topic = (props) => {
   return (
     <TopicWrapper>
       {
-        list.map((item)=>{
+        list?.map((item)=>{
           return (
             <TopicItem key={item.get('id')}>
               <img className='topic-pic' src={item.get('imgUrl')} />
