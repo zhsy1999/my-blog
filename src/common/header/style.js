@@ -2,6 +2,7 @@ import style from 'styled-components'
 import logo from '../../statics/logo.png'
 
 export const HeaderWrapper = style.div`
+  z-index: 1;
   position: relative;
   height: 56px;
   border-bottom: 1px solid #f0f0f0;
@@ -29,6 +30,7 @@ export const Nav = style.div`
 `;
 
 export const NavItem = style.div`
+  display: inline-block;
   line-height: 56px;
   padding: 0 15px;
   font-size: 17px;

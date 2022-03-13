@@ -3,10 +3,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { HeaderWrapper, Logo, Nav, NavItem, NavSearch, Addition, Button, SearchRapper, SearchInfo, SearchInfoTitle, SearchInfoSwitch, SearchInfoItem, SearchInfoList } from './style'
 //组件名必须要大写
+import { Link } from 'react-router-dom'
 
 import { CSSTransition } from 'react-transition-group'
 
 import  { actionCreators } from './store'
+import  { actionCreators as loginActionCreators } from '../../page/login/store'
+
 // import  * as actionCreators from './store/actionCreators'
 
 const spinRef = React.createRef()
@@ -15,7 +18,7 @@ const spinRef = React.createRef()
 const Header = (props) => {
   // export default function Header() {
   // const [focused, setFocused] = useState(false)
-  const { focused, handleInputFocus, handleInputBlur, list, page, totalPage,handleEnter, handleOut, mouseIn, handleChangePage  } = props
+  const { focused, handleInputFocus, handleInputBlur, list, page, totalPage,handleEnter, handleOut, mouseIn, handleChangePage, login, logout  } = props
   // //搜索框聚焦
   // const handleInputFocus = () => {
   //   setFocused(true)
@@ -81,17 +84,21 @@ const Header = (props) => {
           <span className={focused ? 'focused iconfont zoom' : 'iconfont zoom'}>&#xe6e4;</span>
           {getListArea(focused)}
         </SearchRapper>
-        <NavItem className='right'>登陆</NavItem>
+        {
+          login ? <NavItem onClick={logout} className='right'>退出</NavItem> : <Link to='/login'><NavItem className='right'>登陆</NavItem></Link>
+        }
         <NavItem className='right'>
           <span className="iconfont">&#xe636;</span>
         </NavItem>
       </Nav>
       <Addition>
         <Button className='reg'>注册</Button>
-        <Button className='writting'>
-          <span className="iconfont">&#xe600;</span>
-          写文章
-        </Button>
+        <Link to='/write'>
+          <Button className='writting'>
+            <span className="iconfont">&#xe600;</span>
+            写文章
+          </Button>
+        </Link>
       </Addition>
     </HeaderWrapper>
   )
@@ -104,6 +111,7 @@ const mapStateToProps = (state) => {
     page: state.getIn(['header', 'page']),
     mouseIn: state.getIn(['header', 'mouseIn']),
     totalPage: state.getIn(['header', 'totalPage']),
+    login: state.getIn(['login', 'login']),
     // focused: state.get('header').get('focused')
     // focused: state.header.focused
   }
@@ -146,6 +154,10 @@ const mapDispathToProps = (dispatch) => {
         dispatch(actionCreators.changePage(1))
       }
       
+    },
+
+    logout() {
+      dispatch(loginActionCreators.logout())
     }
   }
 }
